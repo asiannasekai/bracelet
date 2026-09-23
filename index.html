@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ORBITAL / computational jewelry studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">◌</span><span>ORBITAL</span><span class="brand-sub">/ COMPUTATIONAL JEWELRY LAB</span></div>
+    <div class="top-actions"><span class="status-dot"></span><span class="mono muted">LOCAL SESSION · DNA READY</span><button class="button button-quiet" id="saveDna">SAVE DNA <span>↓</span></button><button class="button button-primary" id="exportStl">EXPORT STL <span>↗</span></button></div>
+  </header>
+
+  <main class="studio-grid">
+    <aside class="panel left-panel">
+      <div class="panel-heading"><div><span class="eyebrow">01 / SOURCE</span><h2>Mathematical system</h2></div><span class="badge">MVP</span></div>
+      <label class="field-label" for="systemSelect">GENERATOR</label>
+      <select id="systemSelect" class="select-input">
+        <option value="mobius">Möbius strip</option>
+        <option value="lorenz">Lorenz attractor</option>
+        <option value="minimal">Gyroid-inspired surface</option>
+      </select>
+      <div class="system-note"><span class="note-icon">∿</span><div><strong id="faithTitle">Topological fidelity</strong><p id="faithCopy">The half-twist is preserved as the bracelet's continuous centerline and surface.</p></div></div>
+      <div class="rule"></div>
+      <div class="section-row"><span class="eyebrow">PARAMETERS</span><span class="mono tiny">REGENERATE LIVE</span></div>
+      <div id="dynamicParams"></div>
+      <div class="seed-row"><label class="field-label" for="seedInput">SEED</label><div class="seed-control"><input id="seedInput" type="number" value="4817" /><button id="randomSeed" class="icon-button" title="Generate a new seed">↻</button></div></div>
+      <details class="advanced"><summary>ADVANCED MATHEMATICS <span>＋</span></summary><p id="equationText" class="equation">x = (R + v cos(u/2) cos(u)) cos(u)</p></details>
+      <div class="source-footer"><span class="mono tiny">REPRODUCIBLE GEOMETRY</span><span class="checkmark">✓</span></div>
+    </aside>
+
+    <section class="viewport-panel">
+      <div class="viewport-toolbar">
+        <div class="view-tabs"><button class="view-tab active" data-view="solid">SOLID</button><button class="view-tab" data-view="wire">WIRE</button><button class="view-tab" data-view="ghost">GHOST</button></div>
+        <div class="viewport-tools"><button class="tool-button" id="projectionToggle">PERSPECTIVE <span>◇</span></button><button class="tool-button" id="sourceToggle">SOURCE OVERLAY <span class="toggle-dot"></span></button></div>
+      </div>
+      <div id="viewport" class="viewport"><div class="viewport-label"><span class="mono tiny">PREVIEW / 01</span><span id="dimensionReadout" class="mono tiny">Ø 68.0 MM · 24.0 MM W</span></div><div class="axis-label">Y<br><span>↑</span></div><div class="corner-mark">⌜<br>⌞</div></div>
+      <div class="viewer-footer"><div class="legend"><span><i class="legend-swatch math"></i>MATHEMATICAL SOURCE</span><span><i class="legend-swatch finished"></i>WEARABLE TRANSFORM</span></div><span class="mono tiny" id="meshReadout">MESH 0 VERTS · 0 FACES</span></div>
+    </section>
+
+    <aside class="panel right-panel">
+      <div class="panel-heading"><div><span class="eyebrow">02 / TRANSFORM</span><h2>Wearable form</h2></div><span class="mono tiny">DNA <b id="designId">MB-0042-A</b></span></div>
+      <label class="field-label" for="jewelrySelect">OBJECT TYPE</label>
+      <select id="jewelrySelect" class="select-input"><option value="bracelet">Bracelet / full loop</option><option value="cuff">Cuff / open loop</option><option value="pendant">Pendant / suspended</option><option value="ring">Ring / finger loop</option></select>
+      <div class="fidelity-head"><span class="field-label">MATHEMATICAL FIDELITY</span><span id="fidelityValue" class="accent-text">HIGH</span></div>
+      <input id="fidelitySlider" class="range accent-range" type="range" min="0" max="2" step="1" value="0" />
+      <div class="range-labels"><span>FAITHFUL</span><span>EXPERIMENTAL</span></div>
+      <div class="control-stack"><div class="control-row"><label for="diameterSlider">DIAMETER <span id="diameterValue">68.0 mm</span></label><input id="diameterSlider" type="range" min="45" max="90" value="68" step="0.5" /></div><div class="control-row"><label for="widthSlider">WIDTH <span id="widthValue">24.0 mm</span></label><input id="widthSlider" type="range" min="12" max="42" value="24" step="0.5" /></div><div class="control-row"><label for="thicknessSlider">WALL THICKNESS <span id="thicknessValue">3.2 mm</span></label><input id="thicknessSlider" type="range" min="1.6" max="6" value="3.2" step="0.1" /></div></div>
+      <div class="rule"></div>
+      <div class="section-row"><span class="eyebrow">MANUFACTURING</span><span class="mono tiny">FDM / 0.4 NOZZLE</span></div>
+      <div class="manufacturing-grid"><label class="mini-field">MATERIAL<select id="materialSelect"><option>PLA</option><option>PETG</option><option>TPU 95A</option></select></label><label class="mini-field">LAYER HEIGHT<select id="layerSelect"><option>0.20 mm</option><option>0.16 mm</option><option>0.12 mm</option></select></label></div>
+      <div class="printability"><div class="printability-head"><span class="field-label">PRINTABILITY</span><strong id="printScore">92 / 100</strong></div><div class="score-bar"><span id="scoreBar"></span></div><div id="printStatus" class="print-status"><span>✓</span> READY FOR FDM PROTOTYPE</div></div>
+      <div class="warning-list" id="warningList"></div>
+      <div class="rule"></div>
+      <div class="section-row"><span class="eyebrow">MODULAR SYSTEM</span><button class="text-button" id="toggleModular">ENABLE</button></div>
+      <div class="module-preview"><div class="module active">A<span>MB-0042-A</span></div><div class="connector">+</div><div class="module muted-module">B<span>EMPTY</span></div></div>
+      <button class="button button-wide" id="variationsButton">GENERATE 06 VARIATIONS <span>✦</span></button>
+      <button class="button button-ghost button-wide" id="dnaButton">VIEW DESIGN DNA <span>⌘</span></button>
+    </aside>
+  </main>
+
+  <section class="bottom-dock"><div class="dock-title"><span class="eyebrow">DISCOVERED FORMS</span><strong>Variation field</strong></div><div id="variationGrid" class="variation-grid"></div><div class="dock-note"><span class="mono tiny">ALTERING SOURCE PARAMETERS</span><span>changes the form, not just its surface.</span></div></section>
+  <div id="toast" class="toast">DNA saved to your downloads</div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
